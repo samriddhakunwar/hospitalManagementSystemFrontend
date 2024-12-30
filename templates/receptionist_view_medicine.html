@@ -1,0 +1,72 @@
+{% extends 'receptionist_base.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    /* .row {
+      margin: 100px;
+    } */
+
+    /* .add-button {
+      margin: 20px 0;
+    } */
+  </style>
+</head>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-right add-button">
+      <a href="{% url 'add-medicine' %}" class="btn btn-success">Add Medicine</a>
+    </div>
+  </div>
+  
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Medicines Inventory</h6>
+    </div>
+    
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Dosage</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for medicine in medicines %}
+        <tr>
+            <td>{{ medicine.name }}</td>
+            <td>{{ medicine.dosage }}</td>
+            <td>{{ medicine.description }}</td>
+            <td>{{ medicine.price }}</td>
+            <td>
+                <a href="{% url 'update-medicine' medicine.id %}" class="btn btn-warning">Update</a>
+            </td>
+            <td>
+                <a href="{% url 'delete-medicine' medicine.id %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}
